@@ -1,0 +1,57 @@
+  <div class="modal-dialog" role="document">
+    <!--
+      Mensagens do adv.
+    -->
+    <p-messages [value]="msgs"></p-messages>
+
+    <div>
+      <form name="form" autocomplete="off" (ngSubmit)="f.form.valid && cadastrarArrendatario()" #f="ngForm" novalidate>
+        <div class="modal-header">
+          <h4 class="modal-title" id="myModalLabel">SAJ ADV - 15 dias grátis!</h4>
+        </div>
+        <div class="modal-body">
+          <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !assinante.valid }">
+            <label class="required-label">Nome do Assinante</label>
+            <input id="nome" type="text" name="nome" class="required form-control campo-assinante" maxlength="180"
+                   placeholder="nome" [(ngModel)]="arrendatario.nomeAssinante" required #assinante="ngModel"/>
+            <div *ngIf="f.submitted && !assinante.valid" class="help-block">Nome do assinante é requerido</div>
+          </div>
+
+          <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !email.valid }">
+            <label class="required-label">Email (Login de acesso ao SAJ ADV)</label>
+            <input type="email" name="email" class="required form-control campo-email" maxlength="180"
+                   placeholder="e-mail" [(ngModel)]="arrendatario.email" required #email="ngModel" validateEmail/>
+            <div *ngIf="f.submitted && !email.valid" class="help-block">Email é requerido</div>
+          </div>
+
+          <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !senha.valid }">
+            <label class="required-label">Senha</label>
+            <input type="password" id="senha" name="senha" maxlength="180" class="required form-control campo-senha" [(ngModel)]="arrendatario.senha" required #senha="ngModel"/>
+            <div *ngIf="f.submitted && !senha.valid" class="help-block">Senha é requerido</div>
+          </div>
+
+          <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !telefone.valid }">
+            <label class="required-label">Telefone</label>
+            <input name="telefone" class="form-control" [textMask]="{mask :mask}"
+                   placeholder="telefone" maxlength="180" [(ngModel)]="arrendatario.numeroTelefone" required #telefone="ngModel"/>
+            <div *ngIf="f.submitted && !telefone.valid" class="help-block">Telefone é requerido</div>
+          </div>
+
+          <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !termo.valid }">
+            <div class="checkbox">
+              <label><input type="checkbox" class="required" id="termo" name="termo" [(ngModel)]="arrendatario.aceitouTermo" required #termo="ngModel">Li e aceito os Termos
+              </label>
+              <div *ngIf="f.submitted && !termo.valid" class="help-block">Aceite do termo é requerido</div>
+            </div>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button [disabled]="loading" id="btSubmitExperimente" class="btn btn-lg btn-block btn-primary">Iniciar testes
+          </button>
+          <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+        </div>
+
+      </form>
+    </div>
+  </div>

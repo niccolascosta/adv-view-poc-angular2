@@ -1,0 +1,83 @@
+<div role="document">
+  <div class="col-md-12">
+    <h2>Filtros</h2>
+    <form name="form" (ngSubmit)="f.form.valid && buscar()" #f="ngForm" novalidate>
+      <div class="grid">
+        <div class="row">
+          <div class="form-group col-xs-2 col-md-2">
+            <div for="dataInicio" class="control-label">Data cadastro inicio</div>
+            <p-calendar name="dataInicio" (onSelect)="setDate($event,'arrendatarioDataCadastradoDataInicio')" [(ngModel)]="arrendatarioFiltro.arrendatarioDataCadastradoDataInicio" dateFormat="dd/mm/yy" [locale]="pt"></p-calendar>
+          </div>
+          <div class="form-group col-xs-2 col-md-2">
+            <div for="dataFim" class="control-label">Data cadastro fim</div>
+            <p-calendar name="dataFim" (onSelect)="setDate($event,'arrendatarioDataCadastradoDataFim')" [(ngModel)]="arrendatarioFiltro.arrendatarioDataCadastradoDataFim" dateFormat="dd/mm/yy" [locale]="pt"></p-calendar>
+          </div>
+          <div class="form-group col-xs-2 col-md-2">
+            <div for="codigo-arrendatario" class="control-label">Código arrendátario</div>
+            <p-spinner name="codigo-arrendatario" [(ngModel)]="arrendatarioFiltro.arrendatarioCodigo"></p-spinner>
+          </div>
+          <div class="form-group col-xs-2 col-md-2 ajuste">
+            <div for="status" class="control-label">Status</div>
+            <p-multiSelect name="status" styleClass="teste" class="form-group" defaultLabel="Selecione" [options]="status" [(ngModel)]="arrendatarioFiltro.arrendatarioStatus"></p-multiSelect>
+          </div>
+          <div class="form-group col-xs-2 col-md-2">
+            <button class="btn btn-primary">Buscar</button>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group col-xs-2 col-md-2">
+            <div for="nome-arrendatario" class="control-label">Nome arrendátario</div>
+            <input type="text" name="nome-arrendatario" pInputText class="form-group" [(ngModel)]="arrendatarioFiltro.arrendatarioNome"/>
+          </div>
+          <div class="form-group col-xs-2 col-md-2">
+            <div for="nome-usuario" class="control-label">Nome usuário</div>
+            <input type="text" name="nome-usuario" pInputText class="form-group" [(ngModel)]="arrendatarioFiltro.usuarioAdministradorNome"/>
+          </div>
+          <div class="form-group col-xs-2 col-md-2">
+            <div for="mail" class="control-label">E-mail</div>
+            <input type="text" name="email" pInputText class="form-group" [(ngModel)]="arrendatarioFiltro.usuarioEmail"/>
+          </div>
+          <div class="form-group col-xs-2 col-md-2">
+            <div for="telefone" class="control-label">Telefone</div>
+            <input type="text" name="telefone" pInputText class="form-group" [(ngModel)]="arrendatarioFiltro.usuarioAdministradorTelefone"/>
+          </div>
+          <div class="form-group col-xs-3 col-md-3 ajuste-checkbox">
+            <input type="checkbox" name="ativos" [(ngModel)]="arrendatarioFiltro.arrendatarioAtivos">Somente arrendátarios ativos
+          </div>
+        </div>
+
+      </div>
+    </form>
+  </div>
+
+  <div class="col-md-12">
+    <p-dataTable [value]="arrendatarios" [rows]="10" [paginator]="true" [pageLinks]="10" [rowsPerPageOptions]="[5,10,20]">
+      <p-column field="arrendatarioCodigo" header="Código"></p-column>
+      <p-column field="arrendatarioNome" header="Arrendatário"></p-column>
+      <p-column field="arrendatarioDataCadastro" header="Data cadastro">
+        <ng-template let-col let-arrendatario="rowData" let-ri="rowIndex" pTemplate="body">
+          <span>{{arrendatario[col.field] | date:'dd/MM/yyyy'}}</span>
+        </ng-template>
+      </p-column>
+      <p-column field="arrendatarioDataUltimoLogin" header="Último login">
+        <ng-template let-col let-arrendatario="rowData" let-ri="rowIndex" pTemplate="body">
+          <span>{{arrendatario[col.field] | date:'dd/MM/yyyy'}}</span>
+        </ng-template>
+      </p-column>
+      <p-column field="usuarioAdministradorNome" header="Nome admin"></p-column>
+      <p-column field="usuarioAdministradorCpfCnpj" header="CPF/CNPJ"></p-column>
+      <p-column field="pessoaTelefoneWs" header="Telefone">
+        <ng-template let-col let-arrendatario="rowData" let-ri="rowIndex" pTemplate="body">
+          <span>{{arrendatario[col.field] | arrendatarioTelefonePrincipal}}</span>
+        </ng-template>
+      </p-column>
+      <p-column field="pessoaEmailWs" header="E-mail">
+        <ng-template let-col let-arrendatario="rowData" let-ri="rowIndex" pTemplate="body">
+          <span>{{arrendatario[col.field] | arrendatarioEmailPrincipal}}</span>
+        </ng-template>
+      </p-column>
+      <p-column field="arrendatarioUsuarioQuantidadeAtivos  " header="Usuários ativos"></p-column>
+      <p-column field="arrendatarioStatus" header="STATUS"></p-column>
+    </p-dataTable>
+  </div>
+</div>

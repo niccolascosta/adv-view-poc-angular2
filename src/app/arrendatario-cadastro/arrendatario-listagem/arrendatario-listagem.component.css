@@ -1,0 +1,12 @@
+.ui-multiselect {
+  display: block;
+  position: relative;
+  width: auto;
+  cursor: pointer;
+}
+.ajuste{
+  margin: -2px 0px 18px 11px;
+}
+.ajuste-checkbox{
+  padding-top: 23px;
+}
